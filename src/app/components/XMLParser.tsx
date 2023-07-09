@@ -23,6 +23,7 @@ import { XMLParser, XMLBuilder, XMLValidator, XmlBuilderOptionsOptional, X2jOpti
 const builderOptions: XmlBuilderOptionsOptional = {
 	format: true,
 	preserveOrder: true,
+	ignoreAttributes: false,
 }
 
 
@@ -43,7 +44,8 @@ function toXMLBlob(jsonObject: any) {
 
 
 const parsingOptions: X2jOptionsOptional = {
-	preserveOrder: true
+	preserveOrder: true,
+	ignoreAttributes: false,
 };
 
 function toJson(xml: string) {

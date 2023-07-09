@@ -4,6 +4,7 @@ import { useState } from 'react'
 import TablePreviewer from './TablePreviewer';
 import { parseString, Builder, parseStringPromise } from 'xml2js';
 import { XMLParser, XMLBuilder, XMLValidator, XmlBuilderOptionsOptional, X2jOptionsOptional } from "fast-xml-parser";
+import XMLEditor from './XMLEditor';
 
 /** TODO:
  * 1. Add a table to insert a mass amount of phone numbers
@@ -29,14 +30,8 @@ const builderOptions: XmlBuilderOptionsOptional = {
 
 // Convert string/JSON to XML
 function toXMLBlob(jsonObject: any) {
-
 	const builder = new XMLBuilder(builderOptions);
 	const xmlContent = builder.build(jsonObject);
-
-	console.log('building xml')
-	console.log(xmlContent)
-
-	console.log('creating to blob')
 	const blob = new Blob([xmlContent], { type: 'application/xml' });
 	return blob;
 
@@ -46,21 +41,20 @@ function toXMLBlob(jsonObject: any) {
 const parsingOptions: X2jOptionsOptional = {
 	preserveOrder: true,
 	ignoreAttributes: false,
+	alwaysCreateTextNode: false,
 };
 
 function toJson(xml: string) {
 
 	const parser = new XMLParser(parsingOptions);
 	let result = parser.parse(xml);
-	console.log(result)
 	return result
 }
 
 
 export default function XmlReader() {
 	const [xmlFile, setXmlFile] = useState<File>();
-	const [xmlArray, setXmlArray] = useState<any[]>([]);
-	const [xmlObject, setXmlObject] = useState<any>();
+	const [jsonObject, setJsonObject] = useState<any[]>([]);
 	const [fileDownloadUrl, setFileDownloadUrl] = useState<string>();
 
 	function generateURL(blob: Blob) {
@@ -68,8 +62,9 @@ export default function XmlReader() {
 		setFileDownloadUrl(url);
 	}
 
+	console.log(fileDownloadUrl)
+	console.log(jsonObject);
 
-	console.log(xmlArray);
 
 
 	const submit = () => {
@@ -79,12 +74,7 @@ export default function XmlReader() {
 		reader.onload = async function (event) {
 			const text = event.target?.result;
 			if (typeof text !== 'string') return
-			console.log('parsing text')
-			console.log(text)
-			const result = toJson(text)
-
-			const blob = toXMLBlob(result)
-			console.log(blob)
+			const blob = toXMLBlob(jsonObject)
 			generateURL(blob)
 
 
@@ -93,6 +83,26 @@ export default function XmlReader() {
 		if (file === undefined) return
 		reader.readAsText(file);
 	}
+
+	function handleFileUpload(file: File) {
+		const reader = new FileReader();
+
+		reader.onload = async function (event) {
+			const text = event.target?.result;
+			if (typeof text !== 'string') return
+			const result = toJson(text)
+			const blob = toXMLBlob(result)
+			console.log(blob)
+			setJsonObject(result)
+			generateURL(blob)
+
+
+		}
+
+		if (file === undefined) return
+		reader.readAsText(file);
+	}
+
 
 	return (
 		<form id='xml-form'>
@@ -103,26 +113,19 @@ export default function XmlReader() {
 				id='xmlFile'
 				onChange={(event) => {
 					if (event.target.files === null) return
-					setXmlFile(event.target.files[0])
+					handleFileUpload(event.target.files[0])
 				}}
 			>
 			</input>
 			<br />
-			<button
-				onClick={(e) => {
-					e.preventDefault()
-					if (xmlFile) submit()
-				}}>
-				Submit
-			</button>
 			<br />
-			{fileDownloadUrl && <a href={fileDownloadUrl} download='file.xml' className="">
+			{fileDownloadUrl && <a href={fileDownloadUrl} onClick={() => setFileDownloadUrl(undefined)} download='file.xml' className="">
 				Download File
 			</a>}
 
+			<XMLEditor jsonObject={jsonObject.slice(1, jsonObject.length)} />
 
-
-
+			{/* {jsonObject.length > 0 && <TablePreviewer csvArray={jsonObject[1]} />} */}
 
 
 		</form>

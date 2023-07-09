@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import TablePreviewer from './TablePreviewer';
 import { parseString, Builder, parseStringPromise } from 'xml2js';
-
+import { XMLParser, XMLBuilder, XMLValidator, XmlBuilderOptionsOptional, X2jOptionsOptional } from "fast-xml-parser";
 
 /** TODO:
  * 1. Add a table to insert a mass amount of phone numbers
@@ -20,29 +20,38 @@ import { parseString, Builder, parseStringPromise } from 'xml2js';
 
 
 
+const builderOptions: XmlBuilderOptionsOptional = {
+	format: true,
+	preserveOrder: true,
+}
+
 
 // Convert string/JSON to XML
-function toXMLBlob(json: string) {
+function toXMLBlob(jsonObject: any) {
 
-	const builder = new Builder();
-	const xml = builder.buildObject(json);
+	const builder = new XMLBuilder(builderOptions);
+	const xmlContent = builder.build(jsonObject);
+
 	console.log('building xml')
-	console.log(xml)
+	console.log(xmlContent)
 
 	console.log('creating to blob')
-	const blob = new Blob([xml], { type: 'application/txt' });
+	const blob = new Blob([xmlContent], { type: 'application/xml' });
 	return blob;
 
 }
 
+
+const parsingOptions: X2jOptionsOptional = {
+	preserveOrder: true
+};
+
 function toJson(xml: string) {
-	let value = {}
-	parseString(xml, function (err, result) {
-		console.dir(result);
-		value = result
-	});
-	console.log(value)
-	return value
+
+	const parser = new XMLParser(parsingOptions);
+	let result = parser.parse(xml);
+	console.log(result)
+	return result
 }
 
 
@@ -70,8 +79,9 @@ export default function XmlReader() {
 			if (typeof text !== 'string') return
 			console.log('parsing text')
 			console.log(text)
-			const result = await toJson(text)
-			const blob = toXMLBlob(JSON.stringify(result))
+			const result = toJson(text)
+
+			const blob = toXMLBlob(result)
 			console.log(blob)
 			generateURL(blob)
 
@@ -104,7 +114,7 @@ export default function XmlReader() {
 				Submit
 			</button>
 			<br />
-			{fileDownloadUrl && <a href={fileDownloadUrl} className="">
+			{fileDownloadUrl && <a href={fileDownloadUrl} download='file.xml' className="">
 				Download File
 			</a>}
 

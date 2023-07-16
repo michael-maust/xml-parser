@@ -1,7 +1,6 @@
 
-import React, { InputHTMLAttributes } from "react";
+import React from "react";
 import { useFormContext, useController } from "react-hook-form";
-import { Switch } from '../General/Switch';
 import { Tabs, TabsList, TabsTrigger } from '../General/Tabs';
 
 type BooleanSelectorProps = {
@@ -23,15 +22,20 @@ function BooleanSelector({ fieldName, label }: BooleanSelectorProps) {
 
 	const { value, onChange } = field
 
+	console.log(value)
+
 	return (
 		<div className="flex flex-col gap-1 w-fit">
 			<label className="text-gray-300 whitespace-nowrap">{label}</label>
-			<Tabs value={value === true ? 'true' : 'false'} onValueChange={(value) => onChange(value === 'true')} className="bg-gray-" defaultValue="true">
+			<Tabs value={value} onValueChange={(newValue) => {
+				console.log('newValue', newValue)
+				onChange(newValue)
+			}} className="bg-gray-" defaultValue="false">
 				<TabsList className="bg-gray-800" aria-label="Manage your account">
-					<TabsTrigger className="data-[state=active]:text-white" value='true'>
+					<TabsTrigger className="data-[state=active]:text-white" value={'true'}>
 						True
 					</TabsTrigger>
-					<TabsTrigger className="data-[state=active]:text-white" value='false'>
+					<TabsTrigger className="data-[state=active]:text-white" value={'false'}>
 						False
 					</TabsTrigger>
 				</TabsList>

@@ -123,8 +123,6 @@ export default function XmlParser() {
 				Download File
 			</a>}
 
-			<XMLEditor jsonObject={jsonObject.slice(1, jsonObject.length)} />
-
 			{/* {jsonObject.length > 0 && <TablePreviewer csvArray={jsonObject[1]} />} */}
 
 

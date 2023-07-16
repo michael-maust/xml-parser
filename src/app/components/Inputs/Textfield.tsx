@@ -22,7 +22,7 @@ function TextField({ fieldName, label, handleRemove, ...props }: TextFieldProps)
 	const { value, onChange } = field
 
 	return (
-		<div className="flex flex-col gap-1 w-full">
+		<div className="flex flex-col gap-1 w-full max-w-[320px]">
 			<label className="text-gray-300">{label}</label>
 			<div className="flex gap-3">
 				<input

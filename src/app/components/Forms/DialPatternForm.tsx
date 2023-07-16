@@ -10,69 +10,71 @@ import CsvUploader from '../Inputs/CsvUploader'
 
 const DialPatternSchema = z.object({
   notes: z.string().optional(),
-  deny: z.boolean().optional(),
+  deny: z.string().optional(),
   digitPattern: z.string().array().optional(),
   emergencyOrder: z.string().optional(),
   maxDigits: z.string().optional(),
   minDigits: z.string().optional(),
   routingPolicyNames: z.string().optional(), // Change this to be an array of strings
-  treatAsEmergency: z.boolean().optional(),
+  treatAsEmergency: z.string().optional(),
 })
 
-type DialPatternFormValues = z.infer<typeof DialPatternSchema>
-
-const defaultValues = {
-  notes: '',
-  deny: false,
-  digitPattern: [],
-  emergencyOrder: '1',
-  maxDigits: '',
-  minDigits: '',
-  routingPolicyNames: '',
-  treatAsEmergency: false,
-} satisfies DialPatternFormValues
+export type DialPatternFormValues = z.infer<typeof DialPatternSchema>
 
 
-export default function DialPatternForm() {
+
+
+type DialPatternFormProps = {
+  initialValues?: DialPatternFormValues
+  onSubmit: (data: DialPatternFormValues) => void
+}
+
+export default function DialPatternForm({ initialValues, onSubmit }: DialPatternFormProps) {
+
+  const defaultValues = {
+    notes: initialValues?.notes ?? '',
+    deny: initialValues?.deny ?? 'false',
+    digitPattern: initialValues?.digitPattern ?? [],
+    emergencyOrder: initialValues?.emergencyOrder ?? '1',
+    maxDigits: initialValues?.maxDigits ?? '',
+    minDigits: initialValues?.minDigits ?? '',
+    routingPolicyNames: initialValues?.routingPolicyNames ?? '',
+    treatAsEmergency: initialValues?.treatAsEmergency ?? 'false',
+  } satisfies DialPatternFormValues
+
+
 
   const methods = useForm<DialPatternFormValues>({
     defaultValues,
     resolver: zodResolver(DialPatternSchema),
+    mode: 'onChange',
   })
 
   const { handleSubmit, formState: { errors } } = methods
 
-  function onSubmit(data: DialPatternFormValues) {
-    console.log(data)
-  }
-
   return (
     <FormProvider {...methods} >
-      <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3 w-full'>
+      <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 gap-3 w-full'>
 
-        <section className="flex gap-3 w-full">
 
-          <TextField fieldName='notes' tw='flex-1' label='Notes' placeholder='Enter note or leave empty' />
-          <BooleanSelector fieldName='deny' label='Deny' />
 
-        </section>
-        <section className="flex gap-3 w-full">
-          <CsvUploader fieldName='digitPattern' label='Digit Pattern(s)' />
+        <TextField fieldName='notes' tw='flex-1' label='Notes' placeholder='Enter note or leave empty' />
+        <BooleanSelector fieldName='deny' label='Deny' />
 
-          <TextField fieldName='emergencyOrder' label='Emergency Order' placeholder='Enter Emergency Order or leave empty' />
-          <TextField fieldName='maxDigits' label='Max Digits' placeholder='Enter Max Digits or leave empty' />
-        </section>
+        <CsvUploader fieldName='digitPattern' label='Digit Pattern(s)' />
 
-        <section className="flex gap-3 w-full">
+        <TextField fieldName='emergencyOrder' label='Emergency Order' placeholder='Enter Emergency Order or leave empty' />
+        <TextField fieldName='maxDigits' label='Max Digits' placeholder='Enter Max Digits or leave empty' />
 
-          <TextField fieldName='minDigits' label='Min Digits' placeholder='Enter Min Digits or leave empty' />
 
-          <TextField fieldName='routingPolicyNames' label='Routing Policy Names' placeholder='Enter Routing Policy Names or leave empty' />
+        <TextField fieldName='minDigits' label='Min Digits' placeholder='Enter Min Digits or leave empty' />
 
-          <BooleanSelector fieldName='treatAsEmergency' label='Treat As Emergency' />
-        </section>
+        <TextField fieldName='routingPolicyNames' label='Routing Policy Names' placeholder='Enter Routing Policy Names or leave empty' />
 
-        <button className="" type='submit'>Save Template</button>
+        <BooleanSelector fieldName='treatAsEmergency' label='Treat As Emergency' />
+
+
+        <button className="bg-blue-500 px-3 py-2 font-medium w-fit rounded-md hover:bg-blue-600" type='submit'>Update Template</button>
       </form>
 
 

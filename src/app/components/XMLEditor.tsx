@@ -31,22 +31,22 @@ type XMLEditorProps = {
 const XMLEditor = ({ jsonObject }: XMLEditorProps) => {
 	const [path, setPath] = useState([]);
 
-	const handleClick = (key) => {
-		setPath((prevPath) => [...prevPath, key]);
-	};
+	// const handleClick = (key: any) => {
+	// 	setPath((prevPath) => [...prevPath, key]);
+	// };
 
-	const handleBackClick = () => {
-		setPath((prevPath) => prevPath.slice(0, -1));
-	};
+	// const handleBackClick = () => {
+	// 	setPath((prevPath) => prevPath.slice(0, -1));
+	// };
 
-	const renderNode = (key, value) => {
-		return (
-			<div key={key} onClick={() => handleClick(key)}>
-				<span>{key}: </span>
-				<Node data={value} onClick={handleClick} />
-			</div>
-		);
-	};
+	// const renderNode = (key, value) => {
+	// 	return (
+	// 		<div key={key} onClick={() => handleClick(key)}>
+	// 			<span>{key}: </span>
+	// 			<Node data={value} onClick={handleClick} />
+	// 		</div>
+	// 	);
+	// };
 
 	const renderBreadcrumbs = () => {
 		return (
@@ -63,8 +63,8 @@ const XMLEditor = ({ jsonObject }: XMLEditorProps) => {
 	return (
 		<div>
 			{renderBreadcrumbs()}
-			<button onClick={handleBackClick}>Back</button>
-			{Object.entries(jsonObject).map(([key, value]) => renderNode(key, value))}
+			{/* <button onClick={handleBackClick}>Back</button>
+			{Object.entries(jsonObject).map(([key, value]) => renderNode(key, value))} */}
 		</div>
 	);
 };

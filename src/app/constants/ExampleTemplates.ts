@@ -1,12 +1,20 @@
-export const DIAL_PATTERN_Example = `<DigitmapFullTO>
-	<notes>Branson NPA/NXX Codes</notes>
-	<deny>false</deny>
-	<digitpattern>417213</digitpattern>
-	<emergency_order>1</emergency_order>
-	<maxdigits>10</maxdigits>
-	<mindigits>10</mindigits>
-	<routingpolicyNames>To_SBCE_Branson</routingpolicyNames>
-	<treatasemergency>false</treatasemergency>
+import {DialPatternFormValues} from "../components/Forms/DialPatternForm";
+
+type stringDigitPattern = {digitPattern?: string};
+
+export const getDialPattern = (
+  values: Omit<DialPatternFormValues, "digitPattern"> & stringDigitPattern
+) => `<DigitmapFullTO>
+	<notes>${values.notes}</notes>
+	<deny>${values.deny}</deny>
+	<digitpattern>${
+    values.digitPattern ? values.digitPattern : "[Digit Pattern(s) Here]"
+  }</digitpattern>
+	<emergency_order>${values.emergencyOrder}</emergency_order>
+	<maxdigits>${values.maxDigits}</maxdigits>
+	<mindigits>${values.minDigits}</mindigits>
+	<routingpolicyNames>${values.routingPolicyNames}</routingpolicyNames>
+	<treatasemergency>${values.treatAsEmergency}</treatasemergency>
 </DigitmapFullTO>`;
 
 export const INGRESS_ADAPTATION_EXAMPLE = `<IngressadaptationFullTO>

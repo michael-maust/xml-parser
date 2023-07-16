@@ -1,6 +1,7 @@
 import React, { Dispatch } from 'react';
-import { ActiveTemplate } from '@/app/page';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tabs';
+import { ActiveTemplate } from '../pages/MainPage';
 
 type TemplateSelectorProps = {
 	activeTemplate: ActiveTemplate

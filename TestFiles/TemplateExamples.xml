@@ -1,0 +1,39 @@
+
+<!-- Adaptation Example -->
+
+        <EgressadaptationFullTO>
+            <notes></notes>
+            <deletedigits>3</deletedigits>
+            <insertdigits></insertdigits>
+            <matchingpattern>19747</matchingpattern> <!-- Phone number insert here -->
+            <maxdigits>9</maxdigits>
+            <mindigits>9</mindigits>
+            <phoneContext>cdp.udp</phoneContext>
+            <addressToModify>both</addressToModify> <!-- desitnation, origination, both-->
+        </EgressadaptationFullTO>
+		
+        <IngressadaptationFullTO>
+            <notes></notes>
+            <deletedigits>3</deletedigits>
+            <insertdigits></insertdigits>
+            <matchingpattern>197</matchingpattern>
+            <maxdigits>9</maxdigits>
+            <mindigits>9</mindigits>
+            <phoneContext>cdp.udp</phoneContext>
+            <addressToModify>destination</addressToModify> <!-- destination, source, both -->
+        </IngressadaptationFullTO>
+
+
+
+<!-- Dial Patterns -->
+
+	<DigitmapFullTO>
+		<notes>Branson NPA/NXX Codes</notes>
+		<deny>false</deny>
+		<digitpattern>417213</digitpattern> <!-- Insert phone numbers here, have toggle for adding a plus -->
+		<emergency_order>1</emergency_order> <!-- 1 or null -->
+		<maxdigits>10</maxdigits>
+		<mindigits>10</mindigits>
+		<routingpolicyNames>To_SBCE_Branson</routingpolicyNames> <!-- Add multiple routing policies; have drop down of all possible options with custom option as well -->
+		<treatasemergency>false</treatasemergency> <!-- true or false -->
+	</DigitmapFullTO>

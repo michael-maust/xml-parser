@@ -52,7 +52,7 @@ function toJson(xml: string) {
 }
 
 
-export default function XmlReader() {
+export default function XmlParser() {
 	const [xmlFile, setXmlFile] = useState<File>();
 	const [jsonObject, setJsonObject] = useState<any[]>([]);
 	const [fileDownloadUrl, setFileDownloadUrl] = useState<string>();

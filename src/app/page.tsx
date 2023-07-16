@@ -8,6 +8,7 @@ import TemplateSelector from './components/General/TemplateSelector'
 import DialPatternTemplate from './components/Templates/DialPatternTemplate'
 import CodeBlock from './components/General/CodeBlock'
 import { DIAL_PATTERN_Example } from './constants/ExampleTemplates'
+import DialPatternForm from './components/Forms/DialPatternForm'
 
 export enum ActiveTemplate {
   DialPattern = 'Dial Pattern',
@@ -33,7 +34,9 @@ export default function Home() {
 
       <section className="grid grid-cols-2 gap-3 flex-1 w-full">
 
-        <div className="flex w-full justify-center flex-1">
+        <div className="flex w-full gap-6 flex-col flex-1">
+
+          <DialPatternForm />
 
           <CodeBlock code={DIAL_PATTERN_Example} />
 

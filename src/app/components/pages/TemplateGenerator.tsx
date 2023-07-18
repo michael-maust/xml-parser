@@ -57,7 +57,7 @@ export function TemplateGenerator() {
 
 					<h1 className="text-xl font-medium text-orange-400">Template Preview</h1>
 					<div className="pr-16">
-						{isDialPattern && dialPatternForm && <CodeBlock code={getDialPattern(dialPatternForm)} />}
+						{isDialPattern && dialPatternForm && <CodeBlock code={getDialPattern(dialPatternForm, undefined, true)} />}
 						{!isDialPattern && adaptationForm && <CodeBlock code={getAdaptation(adaptationForm, isEgress)} />}
 					</div>
 
@@ -66,7 +66,7 @@ export function TemplateGenerator() {
 				<section className="flex flex-col gap-3 w-full h-fill ">
 
 					<h1 className="text-xl font-medium text-orange-400">Generated Pattern</h1>
-					<DialPatternTemplate formValues={outputFormValues} digitPatterns={digitPatterns ?? []} activeTemplate={activeTemplate} />
+					<DialPatternTemplate formValues={outputFormValues} digitPatterns={digitPatterns} activeTemplate={activeTemplate} />
 					{digitPatterns?.length === 0 && <p className="mb-3 text-gray-300">Upload a CSV file of digit patterns to generate template</p>}
 				</section>
 

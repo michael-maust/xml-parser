@@ -25,7 +25,8 @@ export default function CsvUploader({ onChange }: CsvUploaderProps) {
 			const text = event.target?.result;
 			if (typeof text !== 'string') return
 			const numbers = text.split('\n').map((number) => number.replace('\r', ''));
-			onChange(numbers)
+			const filteredNumbers = numbers.filter((number) => number !== '')
+			onChange(filteredNumbers)
 		}
 
 		if (file === undefined) return

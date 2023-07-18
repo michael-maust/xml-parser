@@ -3,11 +3,12 @@ import { DialPatternFormValues } from '../components/Forms/DialPatternForm'
 
 export function getDialPattern(
   formValues: DialPatternFormValues,
-  digitPattern?: string
+  digitPattern?: string,
+  isDisplay?: boolean
 ) {
-  const digitPatternValue = digitPattern
-    ? digitPattern
-    : '[Digit Pattern(s) Here]'
+  const digitPatternValue = Boolean(isDisplay)
+    ? '[Digit Pattern(s) Here]'
+    : digitPattern
 
   const policyNameArray = formValues.routingPolicyNames ?? []
 

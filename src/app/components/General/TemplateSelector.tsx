@@ -10,15 +10,15 @@ type TemplateSelectorProps = {
 
 function TemplateSelector({ activeTemplate, setActiveTemplate }: TemplateSelectorProps) {
 	return (
-		<Tabs value={activeTemplate} onValueChange={(value) => setActiveTemplate(value as ActiveTemplate)} className="TabsRoot" defaultValue="tab1">
-			<TabsList className="TabsList" aria-label="Manage your account">
-				<TabsTrigger className="" value={ActiveTemplate.DialPattern}>
+		<Tabs value={activeTemplate} onValueChange={(value) => setActiveTemplate(value as ActiveTemplate)} className="h-fit" defaultValue="tab1">
+			<TabsList className='flex flex-wrap h-fit gap-3'>
+				<TabsTrigger value={ActiveTemplate.DialPattern}>
 					{ActiveTemplate.DialPattern}
 				</TabsTrigger>
-				<TabsTrigger className="" value={ActiveTemplate.IngressAdaptation}>
+				<TabsTrigger value={ActiveTemplate.IngressAdaptation}>
 					{ActiveTemplate.IngressAdaptation}
 				</TabsTrigger>
-				<TabsTrigger className="" value={ActiveTemplate.EgressAdaptation}>
+				<TabsTrigger value={ActiveTemplate.EgressAdaptation}>
 					{ActiveTemplate.EgressAdaptation}
 				</TabsTrigger>
 			</TabsList>

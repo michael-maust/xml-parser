@@ -9,6 +9,17 @@ export function getDialPattern(
     ? digitPattern
     : '[Digit Pattern(s) Here]'
 
+  const policyNameArray = formValues.routingPolicyNames ?? []
+
+  const mappedRoutingPolicyName = policyNameArray
+    .map((policy) => `<routingpolicyNames>${policy}</routingpolicyNames>`)
+    .join('\r\n\t')
+
+  const routingPolicyNames =
+    policyNameArray.length > 1
+      ? mappedRoutingPolicyName
+      : '<routingpolicyNames></routingpolicyNames>'
+
   return `<DigitmapFullTO>
 	<notes>${formValues.notes}</notes>
 	<deny>${formValues.deny}</deny>
@@ -16,7 +27,7 @@ export function getDialPattern(
 	<emergency_order>${formValues.emergencyOrder}</emergency_order>
 	<maxdigits>${formValues.maxDigits}</maxdigits>
 	<mindigits>${formValues.minDigits}</mindigits>
-	<routingpolicyNames>${formValues.routingPolicyNames}</routingpolicyNames>
+	${routingPolicyNames}
 	<treatasemergency>${formValues.treatAsEmergency}</treatasemergency>
 </DigitmapFullTO>`
 }

@@ -54,15 +54,17 @@ export default function AdaptationForm({ initialValues, onSubmit }: AdaptationFo
 
   return (
     <FormProvider {...methods} >
-      <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 gap-3 w-full'>
+      <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col gap-6'>
 
-        <TextField fieldName='notes' tw='flex-1' label='Notes' placeholder='Enter notes' />
-        <TextField fieldName='deletedDigits' label='Deleted Digits' placeholder='Enter Emergency Order' />
-        <TextField fieldName='insertedDigits' label='Inserted Digits' placeholder='Enter Emergency Order' />
-        <TextField fieldName='maxDigits' label='Max Digits' placeholder='Enter Emergency Order' />
-        <TextField fieldName='minDigits' label='Min Digits' placeholder='Enter Emergency Order' />
-        <TextField fieldName='phoneContext' label='Phone Context' placeholder='Enter Emergency Order' />
-        <TextField fieldName='addressToModify' label='Address To Modify' placeholder='Enter Emergency Order' />
+        <div className="grid md:grid-cols-2 gap-3">
+          <TextField fieldName='notes' tw='flex-1' label='Notes' placeholder='Enter notes' />
+          <TextField fieldName='deletedDigits' label='Deleted Digits' placeholder='Enter Emergency Order' />
+          <TextField fieldName='insertedDigits' label='Inserted Digits' placeholder='Enter Emergency Order' />
+          <TextField fieldName='maxDigits' label='Max Digits' placeholder='Enter Emergency Order' />
+          <TextField fieldName='minDigits' label='Min Digits' placeholder='Enter Emergency Order' />
+          <TextField fieldName='phoneContext' label='Phone Context' placeholder='Enter Emergency Order' />
+          <TextField fieldName='addressToModify' label='Address To Modify' placeholder='Enter Emergency Order' />
+        </div>
 
         <button className="bg-blue-500 px-3 py-2 font-medium w-fit rounded-md hover:bg-blue-600" type='submit'>Update Template</button>
       </form>

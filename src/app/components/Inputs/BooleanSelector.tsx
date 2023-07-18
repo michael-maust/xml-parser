@@ -31,11 +31,11 @@ function BooleanSelector({ fieldName, label }: BooleanSelectorProps) {
 				console.log('newValue', newValue)
 				onChange(newValue)
 			}} className="bg-gray-" defaultValue="false">
-				<TabsList className="bg-gray-800" aria-label="Manage your account">
-					<TabsTrigger className="data-[state=active]:text-white" value={'true'}>
+				<TabsList className="bg-gray-800">
+					<TabsTrigger value={'true'}>
 						True
 					</TabsTrigger>
-					<TabsTrigger className="data-[state=active]:text-white" value={'false'}>
+					<TabsTrigger value={'false'}>
 						False
 					</TabsTrigger>
 				</TabsList>

@@ -4,10 +4,11 @@ import { DialPatternFormValues } from '../Forms/DialPatternForm';
 import CodeBlock from '../General/CodeBlock';
 import { ActiveTemplate } from '../pages/TemplateGenerator';
 import { getAdaptation, getDialPattern } from '@/app/utils/templates';
+import { AdaptationFormValues } from '../Forms/AdaptationsForm';
 
 
 type DialPatternTemplateProps = {
-	formValues?: DialPatternFormValues
+	formValues?: DialPatternFormValues | AdaptationFormValues
 	digitPatterns: string[]
 	activeTemplate: ActiveTemplate
 }

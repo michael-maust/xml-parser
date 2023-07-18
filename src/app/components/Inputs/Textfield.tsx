@@ -19,8 +19,6 @@ function TextField({ fieldName, label, handleRemove, ...props }: TextFieldProps)
 		rules: { required: true },
 	});
 
-	const { value, onChange } = field
-
 	return (
 		<div className="flex flex-col gap-1 w-full max-w-[320px]">
 			<label className="text-gray-300">{label}</label>
@@ -32,14 +30,6 @@ function TextField({ fieldName, label, handleRemove, ...props }: TextFieldProps)
 					className="py-2 px-2 placeholder-text-gray-400 text-gray-300 truncate bg-gray-800 focus:outline-none focus:ring-orange-400 focus:ring-2 rounded-lg w-full"
 					{...props}
 				/>
-
-				{handleRemove && <button
-					type="button"
-					className="cursor-pointer focus:outline-none focus:ring-orange-400 focus:ring-2 bg-red-800 px-2 py-px w-fit rounded-lg text-tan font-bold hover:bg-red-700"
-					onClick={() => handleRemove()}
-				>
-					Remove
-				</button>}
 			</div>
 			<p className="text-red-600 pt-px">{error?.message}</p>
 		</div>

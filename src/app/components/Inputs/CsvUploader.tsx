@@ -35,7 +35,7 @@ export default function CsvUploader({ onChange }: CsvUploaderProps) {
 
 
 	return (
-		<div className="flex flex-col gap-1 w-full">
+		<div className="flex flex-col gap-1 w-fit cursor-pointer">
 			<input
 				className='h-fit file:bg-gray-800 file:cursor-pointer file:hover:bg-gray-900 file:text-gray-300 file:py-2 file:px-3 file:rounded-md file:focus:ring-orange-400 file:border-none file:mr-2 text-gray-300'
 				type='file'

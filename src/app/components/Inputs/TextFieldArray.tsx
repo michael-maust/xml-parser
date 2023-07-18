@@ -66,7 +66,7 @@ export function TextFieldArray({ fieldName, label, ...props }: TagInputProps) {
 
 				</div>
 			</div>
-			{tags.length > 0 && <div className='flex gap-3 mt-1'>
+			{tags.length > 0 && <div className='flex gap-3 mt-1 flex-wrap'>
 				{tags.map((tag, index) => (
 					<button className='bg-gray-600 group hover:bg-red-800 flex gap-2 px-2 py-1 rounded-md items-center' key={index} onClick={() => removeTag(tag)}>
 

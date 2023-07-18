@@ -19,9 +19,9 @@ export enum ActiveTemplate {
 export function TemplateGenerator() {
 	const [activeTemplate, setActiveTemplate] = useState<ActiveTemplate>(ActiveTemplate.DialPattern)
 
-	const [digitPatterns, setDigitPatterns, removeDigitPatterns] = useLocalStorage<string[]>('digitPatterns', []);
-	const [dialPatternForm, setDialPatternForm, removeDialPatternForm] = useLocalStorage<DialPatternFormValues>('dialPatternForm', emptyDialPatternValues);
-	const [adaptationForm, setAdaptationForm, removeAdaptationsForm] = useLocalStorage<AdaptationFormValues>('adaptationForm', emptyAdaptationValues);
+	const [digitPatterns, setDigitPatterns] = useState<string[]>([]);
+	const [dialPatternForm, setDialPatternForm] = useState<DialPatternFormValues>(emptyDialPatternValues);
+	const [adaptationForm, setAdaptationForm] = useState<AdaptationFormValues>(emptyAdaptationValues);
 
 	const isDialPattern = activeTemplate === ActiveTemplate.DialPattern
 	const isEgress = activeTemplate === ActiveTemplate.EgressAdaptation

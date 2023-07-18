@@ -67,7 +67,7 @@ export function TemplateGenerator() {
 
 					<h1 className="text-xl font-medium text-orange-400">Generated Pattern</h1>
 					<DialPatternTemplate formValues={outputFormValues} digitPatterns={digitPatterns ?? []} activeTemplate={activeTemplate} />
-					{digitPatterns?.length === 0 && <p className="mb-3 text-gray-300">Upload a CSV files of digit patterns to generate template</p>}
+					{digitPatterns?.length === 0 && <p className="mb-3 text-gray-300">Upload a CSV file of digit patterns to generate template</p>}
 				</section>
 
 			</div>

@@ -11,7 +11,7 @@
             <phoneContext>cdp.udp</phoneContext>
             <addressToModify>both</addressToModify> <!-- desitnation, origination, both-->
         </EgressadaptationFullTO>
-		
+
         <IngressadaptationFullTO>
             <notes></notes>
             <deletedigits>3</deletedigits>

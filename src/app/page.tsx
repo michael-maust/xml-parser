@@ -1,9 +1,8 @@
-import { MainPage } from './components/pages/MainPage';
+import { TemplateGenerator } from './components/pages/TemplateGenerator';
 
 export default function Home() {
 
-
   return (
-    <MainPage />
+    <TemplateGenerator />
   )
 }

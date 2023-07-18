@@ -1,27 +1,42 @@
 import React from 'react'
 import { DialPatternFormValues } from '../Forms/DialPatternForm';
-import { getDialPattern } from '@/app/constants/ExampleTemplates';
+
 import CodeBlock from '../General/CodeBlock';
+import { ActiveTemplate } from '../pages/TemplateGenerator';
+import { getAdaptation, getDialPattern } from '@/app/utils/templates';
 
 
 type DialPatternTemplateProps = {
-	value?: DialPatternFormValues
+	formValues?: DialPatternFormValues
+	digitPatterns: string[]
+	activeTemplate: ActiveTemplate
 }
 
-export default function DialPatternTemplate({ value }: DialPatternTemplateProps) {
+export default function DialPatternTemplate({ formValues, digitPatterns, activeTemplate }: DialPatternTemplateProps) {
 
 
-	// map through each digit pattern call getDialPattern and return all results as a single string
-	const dialPattern = value?.digitPattern?.map((pattern) => getDialPattern({ ...value, digitPattern: pattern })).join('\n')
+	const isDialPattern = activeTemplate === ActiveTemplate.DialPattern
+	const isEgress = activeTemplate === ActiveTemplate.EgressAdaptation
+	const isAdaptation = activeTemplate === ActiveTemplate.EgressAdaptation || activeTemplate === ActiveTemplate.IngressAdaptation
 
 
-	console.log(dialPattern)
+	function getPattern(digitPattern: string) {
+		if (!formValues) return null
+		if (isDialPattern) return getDialPattern(formValues, digitPattern)
+		if (isAdaptation) return getAdaptation(formValues, isEgress, digitPattern)
 
-	if (!dialPattern) return null
+	}
+
+	const combinedPatterns = digitPatterns.map((pattern) => getPattern(pattern)).join('\n')
+
+
+	console.log(combinedPatterns)
+
+	if (!combinedPatterns) return <></>
 
 	return (
 		<div className="w-4/5 max-h-[70vh] overflow-y-auto">
-			<CodeBlock code={dialPattern} />
+			<CodeBlock code={combinedPatterns} />
 		</div>
 	)
 }

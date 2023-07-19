@@ -46,6 +46,17 @@ export function getAdaptation(
     ? digitPattern
     : '[Digit Pattern(s) Here]'
 
+  if (!formValues.phoneContext)
+    return `<${parentTag}>
+	<notes>${formValues.notes}</notes>
+	<deletedigits>${formValues.deletedDigits}</deletedigits>
+	<insertdigits>${formValues.insertedDigits}</insertdigits>
+	<matchingpattern>${digitPatternValue}</matchingpattern>
+	<maxdigits>${formValues.maxDigits}</maxdigits>
+	<mindigits>${formValues.minDigits}</mindigits>
+    <addressToModify>${formValues.addressToModify}</addressToModify>
+</${parentTag}>`
+
   return `<${parentTag}>
 	<notes>${formValues.notes}</notes>
 	<deletedigits>${formValues.deletedDigits}</deletedigits>
@@ -54,6 +65,6 @@ export function getAdaptation(
 	<maxdigits>${formValues.maxDigits}</maxdigits>
 	<mindigits>${formValues.minDigits}</mindigits>
 	<phoneContext>${formValues.phoneContext}</phoneContext>
-	<addressToModify>${formValues.addressToModify}</addressToModify>
+    <addressToModify>${formValues.addressToModify}</addressToModify>
 </${parentTag}>`
 }

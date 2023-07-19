@@ -28,10 +28,7 @@ export default function DialPatternTemplate({ formValues, digitPatterns, activeT
 
 	}
 
-	const combinedPatterns = digitPatterns.map((pattern) => getPattern(pattern)).join('\n')
-
-
-	console.log(combinedPatterns)
+	const combinedPatterns = digitPatterns.map((pattern) => getPattern(pattern)).join(isDialPattern ? '\n\n' : '\n')
 
 	if (!combinedPatterns) return <></>
 

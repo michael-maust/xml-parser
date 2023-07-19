@@ -3,6 +3,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod'
 import TextField from '../Inputs/Textfield'
+import FormSelect from '../Inputs/FormSelect'
 
 const AdaptationSchema = z.object({
   notes: z.string().optional(),
@@ -25,10 +26,10 @@ export const emptyAdaptationValues = {
   notes: '',
   deletedDigits: '',
   insertedDigits: '',
-  maxDigits: '',
-  minDigits: '',
-  phoneContext: '',
-  addressToModify: '',
+  maxDigits: '0',
+  minDigits: '0',
+  phoneContext: 'cdp.udp',
+  addressToModify: 'both',
 }
 
 
@@ -38,10 +39,10 @@ export default function AdaptationForm({ initialValues, onSubmit }: AdaptationFo
     notes: initialValues?.notes ?? '',
     deletedDigits: initialValues?.deletedDigits ?? '',
     insertedDigits: initialValues?.insertedDigits ?? '',
-    maxDigits: initialValues?.maxDigits ?? '',
-    minDigits: initialValues?.minDigits ?? '',
+    maxDigits: initialValues?.maxDigits ?? '0',
+    minDigits: initialValues?.minDigits ?? '0',
     phoneContext: initialValues?.phoneContext ?? '',
-    addressToModify: initialValues?.addressToModify ?? '',
+    addressToModify: initialValues?.addressToModify ?? 'both',
   } satisfies AdaptationFormValues
 
   const methods = useForm<AdaptationFormValues>({
@@ -58,12 +59,12 @@ export default function AdaptationForm({ initialValues, onSubmit }: AdaptationFo
 
         <div className="grid md:grid-cols-2 gap-3">
           <TextField fieldName='notes' tw='flex-1' label='Notes' placeholder='Enter notes' />
-          <TextField fieldName='deletedDigits' label='Deleted Digits' placeholder='Enter Emergency Order' />
-          <TextField fieldName='insertedDigits' label='Inserted Digits' placeholder='Enter Emergency Order' />
-          <TextField fieldName='maxDigits' label='Max Digits' placeholder='Enter Emergency Order' />
-          <TextField fieldName='minDigits' label='Min Digits' placeholder='Enter Emergency Order' />
-          <TextField fieldName='phoneContext' label='Phone Context' placeholder='Enter Emergency Order' />
-          <TextField fieldName='addressToModify' label='Address To Modify' placeholder='Enter Emergency Order' />
+          <TextField fieldName='deletedDigits' type='number' label='Deleted Digits' placeholder='Enter deleted digits' />
+          <TextField fieldName='insertedDigits' type='number' label='Inserted Digits' placeholder='Enter inserted digits' />
+          <TextField fieldName='maxDigits' type='number' max={36} min={0} label='Max Digits' placeholder='Enter max digits' />
+          <TextField fieldName='minDigits' type='number' max={36} min={0} label='Min Digits' placeholder='Enter min digits' />
+          <TextField fieldName='phoneContext' label='Phone Context' placeholder='Enter phone context' />
+          <FormSelect fieldName='addressToModify' label='Address To Modify' placeholder='Enter address to modify' options={['destination', 'origination', 'both']} />
         </div>
 
         <button className="bg-blue-500 px-3 py-2 font-medium w-fit rounded-md hover:bg-blue-600" type='submit'>Update Template</button>

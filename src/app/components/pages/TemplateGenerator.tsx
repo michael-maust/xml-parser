@@ -8,7 +8,6 @@ import DialPatternTemplate from '../Templates/DialPatternOutput';
 import AdaptationForm, { AdaptationFormValues, emptyAdaptationValues } from '../Forms/AdaptationsForm';
 import CsvUploader from '../Inputs/CsvUploader';
 import { getAdaptation, getDialPattern } from '@/app/utils/templates';
-import { TextFieldArray } from '../Inputs/TextFieldArray';
 
 export enum ActiveTemplate {
 	DialPattern = 'Dial Pattern',

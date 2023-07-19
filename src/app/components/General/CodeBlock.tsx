@@ -6,6 +6,7 @@ type CodeBlockProps = {
 }
 
 export default function CodeBlock({ code }: CodeBlockProps) {
+
 	return (
 		<div className="h-fit">
 			<CopyBlock

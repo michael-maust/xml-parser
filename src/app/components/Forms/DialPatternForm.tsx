@@ -24,8 +24,8 @@ export const emptyDialPatternValues = {
   notes: '',
   deny: 'false',
   emergencyOrder: '',
-  maxDigits: '',
-  minDigits: '',
+  maxDigits: '0',
+  minDigits: '0',
   routingPolicyNames: [],
   treatAsEmergency: 'false',
 }
@@ -43,8 +43,8 @@ export default function DialPatternForm({ initialValues, onSubmit }: DialPattern
     notes: initialValues?.notes ?? '',
     deny: initialValues?.deny ?? 'false',
     emergencyOrder: initialValues?.emergencyOrder ?? '1',
-    maxDigits: initialValues?.maxDigits ?? '',
-    minDigits: initialValues?.minDigits ?? '',
+    maxDigits: initialValues?.maxDigits ?? '0',
+    minDigits: initialValues?.minDigits ?? '0',
     routingPolicyNames: initialValues?.routingPolicyNames ?? [],
     treatAsEmergency: initialValues?.treatAsEmergency ?? 'false',
   } satisfies DialPatternFormValues
@@ -67,8 +67,8 @@ export default function DialPatternForm({ initialValues, onSubmit }: DialPattern
           <TextField fieldName='notes' tw='flex-1' label='Notes' placeholder='Enter note' />
           <BooleanSelector fieldName='deny' label='Deny' />
           <TextField fieldName='emergencyOrder' label='Emergency Order' placeholder='Enter Emergency Order' />
-          <TextField fieldName='maxDigits' label='Max Digits' placeholder='Enter Max Digits' />
-          <TextField fieldName='minDigits' label='Min Digits' placeholder='Enter Min Digits' />
+          <TextField fieldName='maxDigits' max={36} min={0} type='number' label='Max Digits' placeholder='Enter Max Digits' />
+          <TextField fieldName='minDigits' max={36} min={0} type='number' label='Min Digits' placeholder='Enter Min Digits' />
           <TextFieldArray fieldName='routingPolicyNames' label='Routing Policy Names' placeholder='Enter Routing Policy Names' />
           <BooleanSelector fieldName='treatAsEmergency' label='Treat As Emergency' />
         </div>

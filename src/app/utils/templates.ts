@@ -17,7 +17,7 @@ export function getDialPattern(
     .join('\r\n\t')
 
   const routingPolicyNames =
-    policyNameArray.length > 1
+    policyNameArray.length > 0
       ? mappedRoutingPolicyName
       : '<routingpolicyNames></routingpolicyNames>'
 
